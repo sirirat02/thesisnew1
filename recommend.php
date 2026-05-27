@@ -361,7 +361,7 @@ include __DIR__ . '/includes/nav.php';
                     <label class="block mb-2
                                   font-medium text-gray-700">
 
-                        สไตล์การท่องเที่ยว
+                        สไตล์การท่องเที่ยว 
 
                     </label>
 

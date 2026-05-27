@@ -21,11 +21,17 @@ $days = isset($_GET['days'])
    SUITABILITY
 =============================== */
 if ($group_size >= 5) {
+
     $user_suitability = 'Group';
+
 } elseif ($group_size >= 2) {
+
     $user_suitability = 'Couple';
+
 } else {
+
     $user_suitability = 'Single';
+
 }
 
 /* ===============================
@@ -34,40 +40,31 @@ if ($group_size >= 5) {
 $limit = min($days * 3, 12);
 
 /* ===============================
-   QUERY
+   MAIN RECOMMEND QUERY
 =============================== */
 $sql = "
+
 SELECT
     p.*,
-    c.name AS category_name,
-
-    (
-        (CASE
-            WHEN p.category_id = ? THEN 50
-            ELSE 0
-        END)
-
-        +
-
-        (CASE
-            WHEN p.suitability_group = ? THEN 25
-            ELSE 0
-        END)
-
-        +
-
-        COALESCE(p.popularity_score,0)
-
-    ) AS matching_score
+    c.name AS category_name
 
 FROM places p
 
 JOIN categories c
 ON p.category_id = c.id
 
-ORDER BY matching_score DESC
+WHERE p.category_id = ?
+
+ORDER BY
+    CASE
+        WHEN p.suitability_group = ? THEN 0
+        ELSE 1
+    END,
+    COALESCE(p.popularity_score,0) DESC,
+    RAND()
 
 LIMIT ?
+
 ";
 
 $stmt = mysqli_prepare($conn, $sql);
@@ -85,6 +82,44 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 $num_rows = mysqli_num_rows($result);
+
+/* ===============================
+   ADDITIONAL RECOMMEND
+=============================== */
+
+$extra_sql = "
+
+SELECT
+    p.*,
+    c.name AS category_name
+
+FROM places p
+
+JOIN categories c
+ON p.category_id = c.id
+
+WHERE p.category_id != ?
+
+ORDER BY
+    COALESCE(p.popularity_score,0) DESC,
+    RAND()
+
+LIMIT 3
+
+";
+
+$extra_stmt = mysqli_prepare($conn, $extra_sql);
+
+mysqli_stmt_bind_param(
+    $extra_stmt,
+    "i",
+    $category_id
+);
+
+mysqli_stmt_execute($extra_stmt);
+
+$extra_result = mysqli_stmt_get_result($extra_stmt);
+
 ?>
 
 <!DOCTYPE html>
@@ -107,6 +142,7 @@ $num_rows = mysqli_num_rows($result);
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
+
 .line-clamp-1{
     overflow:hidden;
     display:-webkit-box;
@@ -120,6 +156,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     -webkit-line-clamp:3;
     -webkit-box-orient:vertical;
 }
+
 </style>
 
 </head>
@@ -184,9 +221,9 @@ include __DIR__ . '/includes/nav.php';
 
             <p class="text-gray-500 text-sm">
 
-                พบทั้งหมด
-                <?= $num_rows ?>
-                สถานที่แนะนำ
+                ระบบเลือกสถานที่จาก
+                สไตล์การท่องเที่ยว
+                และรูปแบบการเดินทางของคุณ
 
             </p>
 
@@ -206,139 +243,297 @@ include __DIR__ . '/includes/nav.php';
 
 </div>
 
-<!-- GRID -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- MAIN RECOMMEND -->
+<div class="mb-12">
 
-<?php while ($row = mysqli_fetch_assoc($result)): ?>
+    <div class="flex items-center gap-3 mb-6">
 
-<?php
+        <div class="w-12 h-12 rounded-2xl
+                    bg-emerald-100 text-emerald-600
+                    flex items-center justify-center">
 
-/* ===============================
-   IMAGE PATH FIX
-=============================== */
+            <i class="fa-solid fa-star"></i>
 
-$imagePath = 'images/no-image.jpg';
-
-if (!empty($row['cover_image'])) {
-
-    $dbImage = trim($row['cover_image']);
-
-    // ถ้ามี uploads/ อยู่แล้ว
-    if (
-        strpos($dbImage, 'uploads/') === 0
-    ) {
-
-        $fullPath = $dbImage;
-
-    } else {
-
-        $fullPath = 'uploads/' . $dbImage;
-
-    }
-
-    // เช็คว่าไฟล์มีจริงไหม
-    if (file_exists(__DIR__ . '/' . $fullPath)) {
-        $imagePath = $fullPath;
-    }
-}
-
-/* ===============================
-   MATCH %
-=============================== */
-
-$match_percent = min(
-    round(($row['matching_score'] / 85) * 100),
-    100
-);
-
-?>
-
-<a href="place.php?id=<?= $row['id'] ?>"
-   class="group block bg-white rounded-3xl
-          overflow-hidden shadow-lg
-          hover:shadow-2xl hover:-translate-y-1
-          transition duration-300">
-
-    <!-- IMAGE -->
-    <div class="relative overflow-hidden">
-
-        <img
-        src="<?= htmlspecialchars($imagePath) ?>"
-        alt="<?= htmlspecialchars($row['name']) ?>"
-        class="w-full h-64 object-cover bg-gray-200"
-        loading="lazy">
-
-        <!-- OVERLAY -->
-        <div class="absolute inset-0
-                    bg-gradient-to-t
-                    from-black/60
-                    via-black/10
-                    to-transparent
-                    opacity-0
-                    group-hover:opacity-100
-                    transition duration-300">
         </div>
 
-        <!-- MATCH -->
-        <div class="absolute top-4 left-4">
+        <div>
 
-            <div class="bg-emerald-500 text-white
-                        text-xs font-bold
-                        px-3 py-1 rounded-full shadow">
+            <h2 class="text-2xl font-bold">
+                สถานที่ที่เหมาะกับคุณ
+            </h2>
 
-                MATCH <?= $match_percent ?>%
+            <p class="text-sm text-gray-500">
+                คัดเลือกจากข้อมูลที่กรอกในฟอร์ม
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+
+    <?php
+
+    /* ===============================
+       IMAGE
+    =============================== */
+
+    $imagePath = 'images/no-image.jpg';
+
+    if (!empty($row['cover_image'])) {
+
+        $dbImage = trim($row['cover_image']);
+
+        if (strpos($dbImage, 'uploads/') === 0) {
+
+            $fullPath = $dbImage;
+
+        } else {
+
+            $fullPath = 'uploads/' . $dbImage;
+
+        }
+
+        if (file_exists(__DIR__ . '/' . $fullPath)) {
+
+            $imagePath = $fullPath;
+
+        }
+
+    }
+
+    /* ===============================
+       TAGS
+    =============================== */
+
+    $recommend_tags = [];
+
+    if ($row['category_id'] == $category_id) {
+
+        $recommend_tags[] =
+            'ตรงกับสไตล์ที่เลือก';
+
+    }
+
+    if (
+        $row['suitability_group']
+        == $user_suitability
+    ) {
+
+        $recommend_tags[] =
+            'เหมาะกับรูปแบบการเดินทาง';
+
+    }
+
+    if (
+        (int)$row['popularity_score'] >= 20
+    ) {
+
+        $recommend_tags[] =
+            'สถานที่ยอดนิยม';
+
+    }
+
+    ?>
+
+    <a href="place.php?id=<?= $row['id'] ?>"
+       class="group block bg-white rounded-3xl
+              overflow-hidden shadow-lg
+              hover:shadow-2xl hover:-translate-y-1
+              transition duration-300">
+
+        <!-- IMAGE -->
+        <div class="relative overflow-hidden">
+
+            <img
+            src="<?= htmlspecialchars($imagePath) ?>"
+            alt="<?= htmlspecialchars($row['name']) ?>"
+            class="w-full h-64 object-cover bg-gray-200"
+            loading="lazy">
+
+        </div>
+
+        <!-- CONTENT -->
+        <div class="p-6">
+
+            <!-- CATEGORY -->
+            <div class="mb-3">
+
+                <span class="bg-emerald-50 text-emerald-700
+                             text-xs px-3 py-1 rounded-full">
+
+                    <?= htmlspecialchars($row['category_name']) ?>
+
+                </span>
+
+            </div>
+
+            <!-- TITLE -->
+            <h2 class="text-2xl font-bold mb-2 line-clamp-1">
+
+                <?= htmlspecialchars($row['name']) ?>
+
+            </h2>
+
+            <!-- LOCATION -->
+            <div class="flex items-center gap-2
+                        text-sm text-gray-500 mb-4">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <?= htmlspecialchars($row['province']) ?>
+
+            </div>
+
+            <!-- DESCRIPTION -->
+            <p class="text-sm text-gray-600
+                      leading-7 line-clamp-3">
+
+                <?= htmlspecialchars($row['description']) ?>
+
+            </p>
+
+            <!-- TAGS -->
+            <div class="flex flex-wrap gap-2 mt-4">
+
+            <?php foreach ($recommend_tags as $tag): ?>
+
+                <span
+                class="bg-emerald-50
+                       text-emerald-700
+                       text-xs
+                       px-3 py-1
+                       rounded-full">
+
+                    <?= htmlspecialchars($tag) ?>
+
+                </span>
+
+            <?php endforeach; ?>
 
             </div>
 
         </div>
 
+    </a>
+
+    <?php endwhile; ?>
+
     </div>
 
-    <!-- CONTENT -->
-    <div class="p-6">
+</div>
 
-        <!-- CATEGORY -->
-        <div class="mb-3">
+<!-- EXTRA RECOMMEND -->
+<div>
 
-            <span class="bg-emerald-50 text-emerald-700
+    <div class="flex items-center gap-3 mb-6">
+
+        <div class="w-12 h-12 rounded-2xl
+                    bg-orange-100 text-orange-500
+                    flex items-center justify-center">
+
+            <i class="fa-solid fa-compass"></i>
+
+        </div>
+
+        <div>
+
+            <h2 class="text-2xl font-bold">
+                สถานที่แนะนำเพิ่มเติม
+            </h2>
+
+            <p class="text-sm text-gray-500">
+                เผื่อคุณอยากลองสถานที่แนวอื่นเพิ่มเติม
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    <?php while ($extra = mysqli_fetch_assoc($extra_result)): ?>
+
+    <?php
+
+    $extraImage = 'images/no-image.jpg';
+
+    if (!empty($extra['cover_image'])) {
+
+        $dbImage = trim($extra['cover_image']);
+
+        if (strpos($dbImage, 'uploads/') === 0) {
+
+            $fullPath = $dbImage;
+
+        } else {
+
+            $fullPath = 'uploads/' . $dbImage;
+
+        }
+
+        if (file_exists(__DIR__ . '/' . $fullPath)) {
+
+            $extraImage = $fullPath;
+
+        }
+
+    }
+
+    ?>
+
+    <a href="place.php?id=<?= $extra['id'] ?>"
+       class="group block bg-white rounded-3xl
+              overflow-hidden shadow-lg
+              hover:shadow-2xl hover:-translate-y-1
+              transition duration-300">
+
+        <img
+        src="<?= htmlspecialchars($extraImage) ?>"
+        alt="<?= htmlspecialchars($extra['name']) ?>"
+        class="w-full h-64 object-cover bg-gray-200"
+        loading="lazy">
+
+        <div class="p-6">
+
+            <span class="bg-orange-50 text-orange-600
                          text-xs px-3 py-1 rounded-full">
 
-                <?= htmlspecialchars($row['category_name']) ?>
+                <?= htmlspecialchars($extra['category_name']) ?>
 
             </span>
 
+            <h2 class="text-2xl font-bold mt-3 mb-2 line-clamp-1">
+
+                <?= htmlspecialchars($extra['name']) ?>
+
+            </h2>
+
+            <div class="flex items-center gap-2
+                        text-sm text-gray-500 mb-4">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <?= htmlspecialchars($extra['province']) ?>
+
+            </div>
+
+            <p class="text-sm text-gray-600
+                      leading-7 line-clamp-3">
+
+                <?= htmlspecialchars($extra['description']) ?>
+
+            </p>
+
         </div>
 
-        <!-- TITLE -->
-        <h2 class="text-2xl font-bold mb-2 line-clamp-1">
+    </a>
 
-            <?= htmlspecialchars($row['name']) ?>
-
-        </h2>
-
-        <!-- LOCATION -->
-        <div class="flex items-center gap-2
-                    text-sm text-gray-500 mb-4">
-
-            <i class="fa-solid fa-location-dot"></i>
-
-            <?= htmlspecialchars($row['province']) ?>
-
-        </div>
-
-        <!-- DESCRIPTION -->
-        <p class="text-sm text-gray-600
-                  leading-7 line-clamp-3">
-
-            <?= htmlspecialchars($row['description']) ?>
-
-        </p>
+    <?php endwhile; ?>
 
     </div>
-
-</a>
-
-<?php endwhile; ?>
 
 </div>
 

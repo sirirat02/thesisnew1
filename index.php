@@ -329,7 +329,7 @@ session_start();
 <!-- ================= PROVINCES ================= -->
 
 <style>
-  /* Animation การ hover */
+  /* Animation การ hover,ll.  */
   .reveal {
     opacity: 0;
     transform: translateY(60px);
