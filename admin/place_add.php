@@ -51,11 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $uploadDir = __DIR__ . '/../uploads/';
 
-        // สร้างโฟลเดอร์ถ้ายังไม่มี
         if (!is_dir($uploadDir)) {
-
             mkdir($uploadDir, 0777, true);
-
         }
 
         $firstImage = null;
@@ -66,14 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $tmpName = $_FILES['images']['tmp_name'][$key];
 
-                // ตั้งชื่อไฟล์ให้ปลอดภัย
                 $safeName = preg_replace(
                     '/[^a-zA-Z0-9\._-]/',
                     '_',
                     $imageName
                 );
 
-                // กันชื่อซ้ำ
                 $filename =
                     time() .
                     '_' .
@@ -85,14 +80,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if (move_uploaded_file($tmpName, $target)) {
 
-                    // เก็บรูปแรกเป็น Cover
+                    // รูปแรก = cover
                     if ($firstImage === null) {
-
                         $firstImage = $filename;
-
                     }
 
-                    // บันทึกรูปลง DB
+                    // insert db
                     $conn->query("
                         INSERT INTO place_images
                         (
@@ -367,21 +360,31 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <div class="border-2 border-dashed border-emerald-300
                             rounded-3xl p-10
-                            bg-emerald-50 text-center">
+                            bg-emerald-50">
 
-                    <i class="fa-regular fa-image
-                              text-5xl text-emerald-400 mb-4"></i>
+                    <div class="text-center mb-6">
 
-                    <h3 class="font-bold text-lg mb-2">
-                        อัปโหลดรูปภาพสถานที่
-                    </h3>
+                        <i class="fa-regular fa-image
+                                  text-5xl text-emerald-400 mb-4"></i>
 
-                    <p class="text-sm text-gray-500 mb-2">
-                        สามารถเลือกรูปได้หลายรูปพร้อมกัน
-                    </p>
+                        <h3 class="font-bold text-lg mb-2">
+                            อัปโหลดรูปภาพสถานที่
+                        </h3>
 
+                        <p class="text-sm text-gray-500">
+                            สามารถเลือกรูปได้หลายรูปพร้อมกัน
+                        </p>
+
+                        <p class="text-xs text-gray-400 mt-1">
+                            รูปแรกจะถูกใช้เป็น Cover Image อัตโนมัติ
+                        </p>
+
+                    </div>
+
+                    <!-- FILE INPUT -->
                     <input
                     type="file"
+                    id="imageInput"
                     name="images[]"
                     multiple
                     accept="image/*"
@@ -392,6 +395,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                            file:bg-emerald-500
                            file:text-white
                            hover:file:bg-emerald-600">
+
+                    <!-- PREVIEW -->
+                    <div id="previewContainer"
+                         class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
+                    </div>
 
                 </div>
 
@@ -427,6 +435,86 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     </div>
 
 </div>
+
+<script>
+const imageInput = document.getElementById('imageInput');
+const previewContainer = document.getElementById('previewContainer');
+
+let selectedFiles = [];
+
+imageInput.addEventListener('change', function(e) {
+
+    const files = Array.from(e.target.files);
+
+    files.forEach(file => {
+        selectedFiles.push(file);
+    });
+
+    renderPreview();
+});
+
+function renderPreview() {
+
+    previewContainer.innerHTML = '';
+
+    const dataTransfer = new DataTransfer();
+
+    selectedFiles.forEach((file, index) => {
+
+        dataTransfer.items.add(file);
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+
+            const div = document.createElement('div');
+
+            div.className = 'relative group';
+
+            div.innerHTML = `
+                <img
+                    src="${e.target.result}"
+                    class="w-full h-40 object-cover rounded-2xl shadow border border-gray-200">
+
+                <button
+                    type="button"
+                    onclick="removeImage(${index})"
+                    class="absolute top-2 right-2
+                           bg-red-500 hover:bg-red-600
+                           text-white w-10 h-10 rounded-full
+                           flex items-center justify-center
+                           shadow-lg opacity-0
+                           group-hover:opacity-100 transition">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+                ${index === 0 ? `
+                    <div class="absolute bottom-2 left-2
+                                bg-emerald-500 text-white
+                                text-xs px-3 py-1 rounded-full shadow">
+                        Cover
+                    </div>
+                ` : ''}
+            `;
+
+            previewContainer.appendChild(div);
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    imageInput.files = dataTransfer.files;
+}
+
+function removeImage(index) {
+
+    selectedFiles.splice(index, 1);
+
+    renderPreview();
+}
+</script>
 
 </body>
 </html>

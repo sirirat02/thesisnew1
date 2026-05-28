@@ -7,9 +7,84 @@ if (!isset($_GET['id'])) {
 
 $id = (int)$_GET['id'];
 
-/* ===============================
+/* =========================================
+   GET PLACE
+========================================= */
+$data = $conn->query("
+    SELECT *
+    FROM places
+    WHERE id = $id
+")->fetch_assoc();
+
+if (!$data) {
+    die("ไม่พบข้อมูลสถานที่");
+}
+
+/* =========================================
+   DELETE IMAGE
+========================================= */
+if (isset($_GET['delete_image'])) {
+
+    $imageId = (int)$_GET['delete_image'];
+
+    $imgQuery = $conn->query("
+        SELECT *
+        FROM place_images
+        WHERE id = $imageId
+        AND place_id = $id
+    ");
+
+    if ($imgQuery && $imgQuery->num_rows > 0) {
+
+        $imgData = $imgQuery->fetch_assoc();
+
+        $filePath = __DIR__ . '/../uploads/' . $imgData['image_name'];
+
+        // ลบไฟล์จริง
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        // ลบ DB
+        $conn->query("
+            DELETE FROM place_images
+            WHERE id = $imageId
+        ");
+    }
+
+    header("Location: /thesis/admin/edit_place.php?id=$id");
+    exit;
+}
+
+/* =========================================
+   DELETE COVER
+========================================= */
+if (isset($_GET['delete_cover'])) {
+
+    if (!empty($data['cover_image'])) {
+
+        $coverPath = __DIR__ . '/../uploads/' . $data['cover_image'];
+
+        // ลบไฟล์จริง
+        if (file_exists($coverPath)) {
+            unlink($coverPath);
+        }
+
+        // ลบ DB
+        $conn->query("
+            UPDATE places
+            SET cover_image = ''
+            WHERE id = $id
+        ");
+    }
+
+    header("Location: /thesis/admin/edit_place.php?id=$id");
+    exit;
+}
+
+/* =========================================
    UPDATE
-=============================== */
+========================================= */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name        = mysqli_real_escape_string($conn, $_POST['name']);
@@ -19,9 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $longitude   = mysqli_real_escape_string($conn, $_POST['longitude']);
     $category_id = (int)$_POST['category_id'];
 
-    /* ===============================
-       UPDATE PLACE
-    =============================== */
+    /* UPDATE PLACE */
     $sql = "
         UPDATE places SET
             name='$name',
@@ -37,9 +110,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("SQL Error: " . $conn->error);
     }
 
-    /* ===============================
+    /* =========================================
        UPLOAD COVER IMAGE
-    =============================== */
+    ========================================= */
     if (
         isset($_FILES['cover_image']) &&
         $_FILES['cover_image']['error'] === 0
@@ -47,25 +120,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $uploadDir = __DIR__ . '/../uploads/';
 
-        // สร้างโฟลเดอร์ถ้ายังไม่มี
         if (!is_dir($uploadDir)) {
-
             mkdir($uploadDir, 0777, true);
+        }
 
+        // ลบรูปเก่า
+        if (!empty($data['cover_image'])) {
+
+            $oldPath = $uploadDir . $data['cover_image'];
+
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
+            }
         }
 
         $imageName = $_FILES['cover_image']['name'];
+        $tmpName   = $_FILES['cover_image']['tmp_name'];
 
-        $tmpName = $_FILES['cover_image']['tmp_name'];
-
-        // กันชื่อแปลก
         $safeName = preg_replace(
             '/[^a-zA-Z0-9\._-]/',
             '_',
             $imageName
         );
 
-        // ตั้งชื่อใหม่
         $filename =
             time() .
             '_cover_' .
@@ -75,52 +152,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $target = $uploadDir . $filename;
 
-        // upload file
         if (move_uploaded_file($tmpName, $target)) {
 
-            $safeCover = mysqli_real_escape_string(
-                $conn,
-                $filename
-            );
-
-            // update cover image
             $conn->query("
                 UPDATE places
-                SET cover_image = '$safeCover'
+                SET cover_image = '$filename'
                 WHERE id = '$id'
             ");
         }
     }
 
-    /* ===============================
+    /* =========================================
        UPLOAD MULTIPLE IMAGES
-    =============================== */
+    ========================================= */
     if (!empty($_FILES['images']['name'][0])) {
 
         $uploadDir = __DIR__ . '/../uploads/';
 
-        // สร้างโฟลเดอร์ถ้ายังไม่มี
         if (!is_dir($uploadDir)) {
-
             mkdir($uploadDir, 0777, true);
-
         }
 
         foreach ($_FILES['images']['name'] as $key => $imageName) {
 
-            // เช็ค error
             if ($_FILES['images']['error'][$key] === 0) {
 
                 $tmpName = $_FILES['images']['tmp_name'][$key];
 
-                // กันชื่อไฟล์แปลก
                 $safeName = preg_replace(
                     '/[^a-zA-Z0-9\._-]/',
                     '_',
                     $imageName
                 );
 
-                // ตั้งชื่อใหม่
                 $filename =
                     time() .
                     '_' .
@@ -130,10 +194,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $target = $uploadDir . $filename;
 
-                // upload file
                 if (move_uploaded_file($tmpName, $target)) {
 
-                    // insert ลง place_images
                     $conn->query("
                         INSERT INTO place_images
                         (
@@ -151,30 +213,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    header("Location: places.php");
+    header("Location: /thesis/admin/places.php");
     exit;
 }
 
-/* ===============================
-   GET PLACE
-=============================== */
-$data = $conn->query("
-    SELECT *
-    FROM places
-    WHERE id=$id
-")->fetch_assoc();
-
-if (!$data) {
-    die("ไม่พบข้อมูลสถานที่");
-}
-
-/* ===============================
+/* =========================================
    GET IMAGES
-=============================== */
+========================================= */
 $images = $conn->query("
     SELECT *
     FROM place_images
-    WHERE place_id=$id
+    WHERE place_id = $id
     ORDER BY id DESC
 ");
 ?>
@@ -260,7 +309,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 <!-- CONTENT -->
 <div class="max-w-5xl mx-auto px-6 py-10">
 
-    <!-- HEADER -->
     <div class="mb-8">
 
         <h1 class="text-3xl font-bold mb-2">
@@ -335,9 +383,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                     value="<?= htmlspecialchars($data['province']) ?>"
                     required
                     class="w-full border border-gray-200 rounded-xl
-                           px-4 py-3
-                           focus:ring-2 focus:ring-emerald-400
-                           focus:outline-none">
+                           px-4 py-3">
 
                 </div>
 
@@ -353,9 +399,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                     value="<?= $data['category_id'] ?>"
                     required
                     class="w-full border border-gray-200 rounded-xl
-                           px-4 py-3
-                           focus:ring-2 focus:ring-emerald-400
-                           focus:outline-none">
+                           px-4 py-3">
 
                 </div>
 
@@ -406,21 +450,37 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 </label>
 
-                <!-- CURRENT COVER -->
                 <?php if (!empty($data['cover_image'])): ?>
 
-                    <img
-                    src="/thesis/uploads/<?= htmlspecialchars($data['cover_image']) ?>"
-                    class="w-full md:w-80 h-52 object-cover
-                           rounded-2xl border border-gray-200
-                           shadow mb-4">
+                    <div class="relative w-full md:w-80">
+
+                        <img
+                        src="/thesis/uploads/<?= htmlspecialchars($data['cover_image']) ?>"
+                        class="w-full h-52 object-cover
+                               rounded-2xl border border-gray-200
+                               shadow">
+
+                        <!-- DELETE COVER -->
+                        <a
+                        href="?id=<?= $id ?>&delete_cover=1"
+                        class="absolute top-3 right-3
+                               bg-red-500 hover:bg-red-600
+                               text-white w-10 h-10
+                               rounded-full flex items-center
+                               justify-center shadow-lg">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                        </a>
+
+                    </div>
 
                 <?php else: ?>
 
                     <div class="w-full md:w-80 h-52 rounded-2xl
                                 border-2 border-dashed border-gray-300
                                 flex items-center justify-center
-                                text-gray-400 mb-4">
+                                text-gray-400">
 
                         ไม่มี Cover Image
 
@@ -428,25 +488,20 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <?php endif; ?>
 
-                <!-- UPLOAD COVER -->
                 <input
                 type="file"
                 name="cover_image"
                 accept="image/*"
-                class="block w-full text-sm text-gray-600
+                class="mt-4 block w-full text-sm text-gray-600
                        file:mr-4 file:py-2 file:px-4
                        file:rounded-full file:border-0
                        file:text-sm file:font-semibold
                        file:bg-emerald-500 file:text-white
                        hover:file:bg-emerald-600">
 
-                <p class="text-xs text-gray-400 mt-2">
-                    รูปนี้จะใช้เป็นรูปหลักของสถานที่
-                </p>
-
             </div>
 
-            <!-- IMAGES -->
+            <!-- CURRENT IMAGES -->
             <div>
 
                 <h3 class="text-lg font-bold mb-4">
@@ -460,10 +515,27 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                     <?php while($img = $images->fetch_assoc()): ?>
 
-                        <img
-                        src="/thesis/uploads/<?= htmlspecialchars($img['image_name']) ?>"
-                        class="w-full h-40 object-cover rounded-2xl
-                               shadow border border-gray-200">
+                        <div class="relative">
+
+                            <img
+                            src="/thesis/uploads/<?= htmlspecialchars($img['image_name']) ?>"
+                            class="w-full h-40 object-cover rounded-2xl
+                                   shadow border border-gray-200">
+
+                            <!-- DELETE -->
+                            <a
+                            href="?id=<?= $id ?>&delete_image=<?= $img['id'] ?>"
+                            class="absolute top-2 right-2
+                                   bg-red-500 hover:bg-red-600
+                                   text-white w-10 h-10
+                                   rounded-full flex items-center
+                                   justify-center shadow-lg">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </a>
+
+                        </div>
 
                     <?php endwhile; ?>
 
