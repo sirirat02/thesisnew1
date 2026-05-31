@@ -246,27 +246,24 @@ include __DIR__ . '/includes/nav.php';
 <!-- MAIN RECOMMEND -->
 <div class="mb-12">
 
-    <div class="flex items-center gap-3 mb-6">
+    <div class="flex flex-col items-center justify-center gap-2">
 
         <div class="w-12 h-12 rounded-2xl
                     bg-emerald-100 text-emerald-600
-                    flex items-center justify-center">
+                    flex items-center justify-center mb-3">
 
             <i class="fa-solid fa-star"></i>
 
         </div>
 
-        <div>
+        <h2 class="text-2xl font-bold">
+            สถานที่ที่เหมาะกับคุณ
+        </h2>
 
-            <h2 class="text-2xl font-bold">
-                สถานที่ที่เหมาะกับคุณ
-            </h2>
-
-            <p class="text-sm text-gray-500">
+        <p class="text-sm text-gray-500">
                 คัดเลือกจากข้อมูลที่กรอกในฟอร์ม
-            </p>
+        </p>
 
-        </div>
 
     </div>
 
@@ -428,13 +425,14 @@ include __DIR__ . '/includes/nav.php';
 <!-- EXTRA RECOMMEND -->
 <div>
 
-    <div class="flex items-center gap-3 mb-6">
+    <div class="flex items-center justify-center gap-3 mb-6 text-center">
+
 
         <div class="w-12 h-12 rounded-2xl
-                    bg-orange-100 text-orange-500
-                    flex items-center justify-center">
+                    bg-emerald-100 text-emerald-600
+                    flex items-center justify-center mb-3">
 
-            <i class="fa-solid fa-compass"></i>
+            <i class="fa-solid fa-star"></i>
 
         </div>
 

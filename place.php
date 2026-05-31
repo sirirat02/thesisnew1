@@ -99,20 +99,24 @@ include __DIR__ . '/includes/nav.php';
     <div class="relative mb-6">
 
         <div id="slider"
-             class="flex overflow-x-auto snap-x snap-mandatory
+            class="flex overflow-x-auto snap-x snap-mandatory
                     rounded-3xl shadow-lg scroll-smooth
                     scrollbar-hide bg-black">
 
             <?php if ($images->num_rows > 0): ?>
 
-                <?php while($img = $images->fetch_assoc()): ?>
+                <?php
+                $images->data_seek(0);
+                while($img = $images->fetch_assoc()):
+                ?>
 
                     <div class="min-w-full snap-start relative">
 
                         <img
                         src="uploads/<?= htmlspecialchars($img['image_name']) ?>"
+                        onclick="openImage(this.src)"
                         class="w-full h-[260px] md:h-[420px]
-                               object-cover"
+                            object-cover cursor-pointer hover:opacity-95 transition"
                         alt="">
 
                     </div>
@@ -131,9 +135,7 @@ include __DIR__ . '/includes/nav.php';
 
                             <i class="fa-regular fa-image text-5xl mb-3"></i>
 
-                            <div>
-                                ไม่มีรูปภาพ
-                            </div>
+                            <div>ไม่มีรูปภาพ</div>
 
                         </div>
 
@@ -145,28 +147,69 @@ include __DIR__ . '/includes/nav.php';
 
         </div>
 
-        <!-- BUTTON -->
+        <!-- PREV -->
         <button onclick="slidePrev()"
                 class="absolute left-3 top-1/2 -translate-y-1/2
-                       bg-white/80 hover:bg-white
-                       w-10 h-10 rounded-full shadow
-                       transition">
+                    bg-white/80 hover:bg-white
+                    w-10 h-10 rounded-full shadow">
 
             <i class="fa-solid fa-chevron-left"></i>
 
         </button>
 
+        <!-- NEXT -->
         <button onclick="slideNext()"
                 class="absolute right-3 top-1/2 -translate-y-1/2
-                       bg-white/80 hover:bg-white
-                       w-10 h-10 rounded-full shadow
-                       transition">
+                    bg-white/80 hover:bg-white
+                    w-10 h-10 rounded-full shadow">
 
             <i class="fa-solid fa-chevron-right"></i>
 
         </button>
 
     </div>
+
+    <!-- IMAGE MODAL -->
+    <div id="imageModal"
+        class="fixed inset-0 bg-black/90 z-50 hidden
+                items-center justify-center p-4">
+
+        <!-- CLOSE -->
+        <button onclick="closeImage()"
+                class="absolute top-5 right-5
+                    text-white text-4xl">
+
+            &times;
+
+        </button>
+
+        <img id="modalImage"
+            src=""
+            class="max-w-full max-h-[90vh]
+                    rounded-xl shadow-2xl">
+
+<!-- BUTTON -->
+<!-- <button onclick="slidePrev()"
+        class="absolute left-3 top-1/2 -translate-y-1/2
+               bg-white/80 hover:bg-white
+               w-10 h-10 rounded-full shadow
+               transition">
+
+    <i class="fa-solid fa-chevron-left"></i>
+
+</button>
+
+<button onclick="slideNext()"
+        class="absolute right-3 top-1/2 -translate-y-1/2
+               bg-white/80 hover:bg-white
+               w-10 h-10 rounded-full shadow
+               transition">
+
+    <i class="fa-solid fa-chevron-right"></i>
+
+</button> -->
+
+</div>
 
     <!-- CONTENT -->
     <div class="bg-white rounded-3xl shadow-lg p-6 md:p-8">
@@ -440,9 +483,7 @@ let currentIndex = 0;
 
 const slides = slider.children;
 
-/* ===============================
-   NEXT
-=============================== */
+/* NEXT */
 function slideNext(){
 
     currentIndex++;
@@ -457,9 +498,7 @@ function slideNext(){
     });
 }
 
-/* ===============================
-   PREV
-=============================== */
+/* PREV */
 function slidePrev(){
 
     currentIndex--;
@@ -473,6 +512,42 @@ function slidePrev(){
         behavior: 'smooth'
     });
 }
+
+/* OPEN IMAGE */
+function openImage(src){
+
+    document.getElementById('modalImage').src = src;
+
+    document.getElementById('imageModal').classList.remove('hidden');
+
+    document.getElementById('imageModal').classList.add('flex');
+}
+
+/* CLOSE IMAGE */
+function closeImage(){
+
+    document.getElementById('imageModal').classList.add('hidden');
+
+    document.getElementById('imageModal').classList.remove('flex');
+}
+
+/* CLICK BLACK AREA TO CLOSE */
+document.getElementById('imageModal').addEventListener('click', function(e){
+
+    if(e.target === this){
+        closeImage();
+    }
+
+});
+
+/* ESC KEY */
+document.addEventListener('keydown', function(e){
+
+    if(e.key === 'Escape'){
+        closeImage();
+    }
+
+});
 
 </script>
 
