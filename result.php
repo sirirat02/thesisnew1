@@ -84,6 +84,44 @@ $result = mysqli_stmt_get_result($stmt);
 $num_rows = mysqli_num_rows($result);
 
 /* ===============================
+   SAVE RECOMMENDATION LOG
+=============================== */
+
+$recommendedPlaces = [];
+
+while($row = mysqli_fetch_assoc($result)){
+
+    $recommendedPlaces[] = $row;
+
+    if(isset($_SESSION['user']['id'])){
+
+        $user_id = (int)$_SESSION['user']['id'];
+        $place_id = (int)$row['id'];
+        $style_name = $row['category_name'];
+
+        $insert = mysqli_prepare(
+            $conn,
+            "INSERT INTO recommendation_logs
+            (user_id, place_id, style_name)
+            VALUES (?, ?, ?)"
+        );
+
+        mysqli_stmt_bind_param(
+            $insert,
+            "iis",
+            $user_id,
+            $place_id,
+            $style_name
+        );
+
+        mysqli_stmt_execute($insert);
+        mysqli_stmt_close($insert);
+
+    }
+
+}
+
+/* ===============================
    ADDITIONAL RECOMMEND
 =============================== */
 
@@ -118,9 +156,7 @@ mysqli_stmt_bind_param(
 
 mysqli_stmt_execute($extra_stmt);
 
-$extra_result = mysqli_stmt_get_result($extra_stmt);
-
-?>
+$extra_result = mysqli_stmt_get_result($extra_stmt);?>
 
 <!DOCTYPE html>
 <html lang="th">
@@ -269,7 +305,7 @@ include __DIR__ . '/includes/nav.php';
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+    <?php foreach($recommendedPlaces as $row): ?>
 
     <?php
 
@@ -416,7 +452,7 @@ include __DIR__ . '/includes/nav.php';
 
     </a>
 
-    <?php endwhile; ?>
+    <?php endforeach; ?>
 
     </div>
 

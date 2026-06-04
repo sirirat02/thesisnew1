@@ -416,15 +416,34 @@ include __DIR__ . '/includes/nav.php';
 
         </a>
 
-        <!-- ADMIN BUTTON -->
         <?php if ($data['role'] === 'admin'): ?>
 
+        <!-- DASHBOARD -->
+
+        <a href="admin/dashboard.php"
+        class="flex items-center justify-between
+                px-4 py-3 rounded-xl
+                bg-blue-50 hover:bg-blue-100
+                border border-blue-200
+                transition mb-3">
+
+            <span class="font-medium text-blue-800">
+                <i class="fa-solid fa-chart-line me-2"></i>
+                Dashboard
+            </span>
+
+            <i class="fa-solid fa-arrow-right text-blue-700"></i>
+
+        </a>
+
+        <!-- จัดการสถานที่ (ของเดิม) -->
+
         <a href="admin/places.php"
-           class="flex items-center justify-between
-                  px-4 py-3 rounded-xl
-                  bg-yellow-50 hover:bg-yellow-100
-                  border border-yellow-200
-                  transition">
+        class="flex items-center justify-between
+                px-4 py-3 rounded-xl
+                bg-yellow-50 hover:bg-yellow-100
+                border border-yellow-200
+                transition">
 
             <span class="font-medium text-yellow-800">
                 <i class="fa-solid fa-gear me-2"></i>

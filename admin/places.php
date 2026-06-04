@@ -216,6 +216,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 หน้าเว็บ
 
             </a>
+            <!-- Dashboard -->
+            <a href="/thesis/admin/dashboard.php"
+               class="h-12 px-5 rounded-2xl
+                      bg-gray-100 hover:bg-gray-200
+                      text-gray-700 font-semibold
+                      transition flex items-center gap-2">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                Dashboard
+
+            </a>
 
             <!-- ADD -->
             <a href="/thesis/admin/place_add.php"
