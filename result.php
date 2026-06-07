@@ -93,32 +93,30 @@ while($row = mysqli_fetch_assoc($result)){
 
     $recommendedPlaces[] = $row;
 
-    if(isset($_SESSION['user']['id'])){
+    $user_id = isset($_SESSION['user']['id'])
+        ? (int)$_SESSION['user']['id']
+        : null;
 
-        $user_id = (int)$_SESSION['user']['id'];
-        $place_id = (int)$row['id'];
-        $style_name = $row['category_name'];
+    $place_id = (int)$row['id'];
+    $style_name = $row['category_name'];
 
-        $insert = mysqli_prepare(
-            $conn,
-            "INSERT INTO recommendation_logs
-            (user_id, place_id, style_name)
-            VALUES (?, ?, ?)"
-        );
+    $insert = mysqli_prepare(
+        $conn,
+        "INSERT INTO recommendation_logs
+        (user_id, place_id, style_name)
+        VALUES (?, ?, ?)"
+    );
 
-        mysqli_stmt_bind_param(
-            $insert,
-            "iis",
-            $user_id,
-            $place_id,
-            $style_name
-        );
+    mysqli_stmt_bind_param(
+        $insert,
+        "iis",
+        $user_id,
+        $place_id,
+        $style_name
+    );
 
-        mysqli_stmt_execute($insert);
-        mysqli_stmt_close($insert);
-
-    }
-
+    mysqli_stmt_execute($insert);
+    mysqli_stmt_close($insert);
 }
 
 /* ===============================
