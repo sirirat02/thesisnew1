@@ -84,7 +84,7 @@ $result = mysqli_stmt_get_result($stmt);
 $num_rows = mysqli_num_rows($result);
 
 /* ===============================
-   SAVE RECOMMENDATION LOG
+   SAVE RECOMMENDATION LOG แก้ไขตรงนี้ 7/6/2026
 =============================== */
 
 $recommendedPlaces = [];
@@ -280,7 +280,7 @@ include __DIR__ . '/includes/nav.php';
 <!-- MAIN RECOMMEND -->
 <div class="mb-12">
 
-    <div class="flex flex-col items-center justify-center gap-2">
+    <div class="flex flex-col items-center justify-center gap-2 mb-12">
 
         <div class="w-12 h-12 rounded-2xl
                     bg-emerald-100 text-emerald-600
@@ -295,9 +295,8 @@ include __DIR__ . '/includes/nav.php';
         </h2>
 
         <p class="text-sm text-gray-500">
-                คัดเลือกจากข้อมูลที่กรอกในฟอร์ม
+            คัดเลือกจากข้อมูลที่กรอกในฟอร์ม
         </p>
-
 
     </div>
 

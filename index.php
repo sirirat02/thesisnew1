@@ -18,274 +18,363 @@ session_start();
 <!-- ================= NAVBAR ON HERO ================= -->
 <nav class="absolute top-0 left-0 w-full z-20">
 
-  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-white">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between text-white">
 
-    <!-- Logo -->
-    <div class="text-lg font-bold">
-      <img src="images/LogoImage11.png" class="h-20 w-auto">
-    </div>
+      <!-- Logo -->
+      <a href="index.php" class="flex-shrink-0">
+          <img src="images/LogoImage11.png"
+              alt="Logo"
+              class="h-12 md:h-20 w-auto">
+      </a>
 
-    <!-- MENU -->
-    <ul class="hidden md:flex items-center gap-8 font-medium">
+      <!-- Mobile Button -->
+      <button id="menuBtn"
+              class="md:hidden text-white text-3xl p-2">
+          <i class="fa-solid fa-bars"></i>
+      </button>
 
-      <!-- ABOUT -->
-      <li>
-        <a href="about.php"
-           class="hover:text-yellow-400 transition">
-          About
-        </a>
-      </li>
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex items-center gap-8 font-medium">
 
-      <!-- DROPDOWN -->
-      <li class="relative group cursor-pointer">
-
-        <span class="hover:text-yellow-400 transition">
-          สถานที่ท่องเที่ยว
-          <i class="fa-solid fa-chevron-down text-xs ml-1"></i>
-        </span>
-
-        <ul class="absolute top-8 left-0 w-44
-                  bg-black/90 rounded-lg shadow-lg
-                  opacity-0 invisible
-                  group-hover:opacity-100
-                  group-hover:visible
-                  transition-all duration-200">
-
+          <!-- ABOUT -->
           <li>
-            <a href="chaingmai.php"
-               class="block px-4 py-2 hover:bg-white/10">
-              เชียงใหม่
-            </a>
+              <a href="about.php"
+                class="hover:text-yellow-400 transition">
+                  About
+              </a>
           </li>
 
-          <li>
-            <a href="chiangrai.php"
-               class="block px-4 py-2 hover:bg-white/10">
-              เชียงราย
-            </a>
+          <!-- DROPDOWN -->
+          <li class="relative group cursor-pointer">
+
+              <span class="hover:text-yellow-400 transition">
+                  สถานที่ท่องเที่ยว
+                  <i class="fa-solid fa-chevron-down text-xs ml-1"></i>
+              </span>
+
+              <ul class="absolute top-8 left-0 w-44
+                        bg-black/90 rounded-lg shadow-lg
+                        opacity-0 invisible
+                        group-hover:opacity-100
+                        group-hover:visible
+                        transition-all duration-200">
+
+                  <li><a href="chaingmai.php" class="block px-4 py-2 hover:bg-white/10">เชียงใหม่</a></li>
+                  <li><a href="chiangrai.php" class="block px-4 py-2 hover:bg-white/10">เชียงราย</a></li>
+                  <li><a href="tak.php" class="block px-4 py-2 hover:bg-white/10">ตาก</a></li>
+                  <li><a href="phayao.php" class="block px-4 py-2 hover:bg-white/10">พะเยา</a></li>
+                  <li><a href="maehongson.php" class="block px-4 py-2 hover:bg-white/10">แม่ฮ่องสอน</a></li>
+
+              </ul>
+
           </li>
 
-          <li>
-            <a href="tak.php"
-               class="block px-4 py-2 hover:bg-white/10">
-              ตาก
-            </a>
-          </li>
+          <?php if (!isset($_SESSION['user'])): ?>
 
-          <li>
-            <a href="phayao.php"
-               class="block px-4 py-2 hover:bg-white/10">
-              พะเยา
-            </a>
-          </li>
+              <li>
+                  <a href="login.php"
+                    class="inline-flex items-center gap-2
+                            border border-white
+                            px-5 py-2 rounded-lg
+                            hover:bg-white hover:text-black transition">
+                      <i class="fa-solid fa-user"></i>
+                      Login
+                  </a>
+              </li>
 
-          <li>
-            <a href="maehongson.php"
-               class="block px-4 py-2 hover:bg-white/10">
-              แม่ฮ่องสอน
-            </a>
-          </li>
+              <li>
+                  <a href="register.php"
+                    class="inline-flex items-center gap-2
+                            bg-yellow-400 text-black
+                            px-5 py-2 rounded-lg
+                            hover:bg-yellow-500 transition">
+                      <i class="fa-solid fa-user-plus"></i>
+                      Register
+                  </a>
+              </li>
 
-        </ul>
-      </li>
+          <?php else: ?>
 
-      <!-- ================= USER SYSTEM ================= -->
+              <?php
 
-      <?php if (!isset($_SESSION['user'])): ?>
+              $username = $_SESSION['user']['username'] ?? 'User';
+              $profile_image = $_SESSION['user']['profile_image'] ?? '';
+              $role = $_SESSION['user']['role'] ?? 'user';
 
-        <!-- ยังไม่ Login -->
-
-        <li>
-          <a href="login.php"
-             class="inline-flex items-center gap-2
-                    border border-white
-                    px-5 py-2 rounded-lg
-                    text-white font-medium
-                    hover:bg-gray-200 hover:text-black
-                    transition">
-
-            <i class="fa-solid fa-user"></i>
-            Login
-
-          </a>
-        </li>
-
-        <li>
-          <a href="register.php"
-             class="inline-flex items-center gap-2
-                    bg-yellow-400 text-black
-                    px-5 py-2 rounded-lg
-                    font-medium
-                    hover:bg-yellow-500
-                    transition">
-
-            <i class="fa-solid fa-user-plus"></i>
-            Register
-
-          </a>
-        </li>
-
-      <?php else: ?>
-
-        <?php
-
-          // ================= USER DATA =================
-          $username = $_SESSION['user']['username'] ?? 'User';
-
-          $profile_image = $_SESSION['user']['profile_image'] ?? '';
-
-          $role = $_SESSION['user']['role'] ?? 'user';
-
-          /*
-            FIX PATH รูปโปรไฟล์
-          */
-
-          if (!empty($profile_image)) {
-
-              // ถ้าเป็นแค่ชื่อไฟล์
-              if (
-                  !str_contains($profile_image, 'uploads/')
-                  &&
-                  !str_contains($profile_image, 'http')
-              ) {
-                  $profile_image = 'uploads/profiles/' . $profile_image;
+              if (!empty($profile_image)) {
+                  if (
+                      !str_contains($profile_image, 'uploads/')
+                      &&
+                      !str_contains($profile_image, 'http')
+                  ) {
+                      $profile_image = 'uploads/profiles/' . $profile_image;
+                  }
               }
-          }
 
-        ?>
+              ?>
 
-        <!-- USER DROPDOWN -->
-        <li class="relative group">
+              <li class="relative group">
 
-          <button
-            class="inline-flex items-center gap-3
-                   border border-white
-                   px-4 py-2
-                   rounded-full
-                   text-white font-medium
-                   hover:bg-gray-200 hover:text-black
-                   transition">
+                  <button
+                      class="inline-flex items-center gap-3
+                            border border-white
+                            px-4 py-2 rounded-full
+                            hover:bg-white hover:text-black
+                            transition">
 
-            <!-- PROFILE IMAGE -->
-            <?php if (!empty($profile_image)): ?>
+                      <?php if (!empty($profile_image)): ?>
 
-              <img
-                src="<?= htmlspecialchars($profile_image) ?>"
-                alt="Profile"
-                class="w-10 h-10 rounded-full object-cover border-2 border-white"
+                          <img
+                              src="<?= htmlspecialchars($profile_image) ?>"
+                              class="w-10 h-10 rounded-full object-cover border-2 border-white"
+                              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
 
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-              >
+                          <div class="hidden w-10 h-10 rounded-full bg-white/20 items-center justify-center border border-white">
+                              <i class="fa-solid fa-user"></i>
+                          </div>
 
-              <!-- fallback icon -->
-              <div
-                class="w-10 h-10 rounded-full
-                       bg-white/20
-                       hidden
-                       items-center justify-center
-                       border border-white">
+                      <?php else: ?>
 
-                <i class="fa-solid fa-user"></i>
+                          <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center border border-white">
+                              <i class="fa-solid fa-user"></i>
+                          </div>
 
-              </div>
+                      <?php endif; ?>
 
-            <?php else: ?>
+                      <span><?= htmlspecialchars($username) ?></span>
 
-              <!-- ถ้าไม่มีรูป -->
-              <div
-                class="w-10 h-10 rounded-full
-                       bg-white/20
-                       flex items-center justify-center
-                       border border-white">
+                      <i class="fa-solid fa-chevron-down text-xs"></i>
 
-                <i class="fa-solid fa-user"></i>
+                  </button>
 
-              </div>
+                  <ul class="absolute right-0 mt-2 w-56
+                            bg-black/90 rounded-lg shadow-lg
+                            opacity-0 invisible
+                            group-hover:opacity-100
+                            group-hover:visible
+                            transition-all duration-200">
 
-            <?php endif; ?>
+                      <li>
+                          <a href="profile.php"
+                            class="block px-4 py-3 hover:bg-white/10">
+                              <i class="fa-solid fa-user me-2"></i>
+                              โปรไฟล์ของฉัน
+                          </a>
+                      </li>
 
-            <!-- USERNAME -->
-            <span>
-              <?= htmlspecialchars($username) ?>
-            </span>
+                      <li>
+                          <a href="history.php"
+                            class="block px-4 py-3 hover:bg-white/10">
+                              <i class="fa-solid fa-clock-rotate-left me-2"></i>
+                              ประวัติการค้นหา
+                          </a>
+                      </li>
 
-            <i class="fa-solid fa-chevron-down text-xs"></i>
+                      <?php if ($role === 'admin'): ?>
+                          <li>
+                              <a href="admin/places.php"
+                                class="block px-4 py-3 text-yellow-300 hover:bg-yellow-400/20">
+                                  <i class="fa-solid fa-shield-halved me-2"></i>
+                                  ระบบผู้ดูแล
+                              </a>
+                          </li>
+                      <?php endif; ?>
+
+                      <li>
+                          <a href="logout.php"
+                            class="block px-4 py-3 text-red-400 hover:bg-white/10">
+                              <i class="fa-solid fa-right-from-bracket me-2"></i>
+                              Logout
+                          </a>
+                      </li>
+
+                  </ul>
+
+              </li>
+
+          <?php endif; ?>
+
+      </ul>
+
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu"
+      class="hidden md:hidden fixed top-0 right-0
+              w-72 h-screen
+              bg-black/95 backdrop-blur-md
+              text-white z-50 overflow-y-auto">
+
+      <div class="flex items-center justify-between p-4 border-b border-white/10">
+
+          <img src="images/LogoImage11.png"
+              class="h-12 w-auto">
+
+          <button id="closeMenu"
+                  class="text-3xl">
+              <i class="fa-solid fa-xmark"></i>
+          </button>
+
+      </div>
+
+      <a href="about.php" class="block px-6 py-4 border-b border-white/10">About</a>
+
+      <!-- จังหวัด Dropdown -->
+      <div class="border-b border-white/10">
+
+          <button id="provinceBtn"
+                  class="w-full flex items-center justify-between
+                        px-6 py-4 text-left">
+
+              <span>สถานที่ท่องเที่ยว</span>
+
+              <i id="provinceIcon"
+                class="fa-solid fa-chevron-down"></i>
 
           </button>
 
-          <!-- ================= DROPDOWN MENU ================= -->
+          <div id="provinceMenu" class="hidden">
 
-          <ul class="absolute right-0 mt-2 w-56
-                    bg-black/90 rounded-lg shadow-lg
-                    opacity-0 invisible
-                    group-hover:opacity-100
-                    group-hover:visible
-                    transition-all duration-200 overflow-hidden">
-
-            <!-- PROFILE -->
-            <li>
-              <a href="profile.php"
-                 class="block px-4 py-3 hover:bg-white/10">
-
-                <i class="fa-solid fa-user me-2"></i>
-                โปรไฟล์ของฉัน
-
+              <a href="chaingmai.php"
+                class="block px-10 py-3 hover:bg-white/10">
+                  เชียงใหม่
               </a>
-            </li>
 
-            <!-- HISTORY -->
-            <li>
-              <a href="history.php"
-                 class="block px-4 py-3 hover:bg-white/10">
-
-                <i class="fa-solid fa-clock-rotate-left me-2"></i>
-                ประวัติการค้นหา
-
+              <a href="chiangrai.php"
+                class="block px-10 py-3 hover:bg-white/10">
+                  เชียงราย
               </a>
-            </li>
 
-            <!-- ================= ADMIN BUTTON ================= -->
+              <a href="tak.php"
+                class="block px-10 py-3 hover:bg-white/10">
+                  ตาก
+              </a>
 
-            <?php if ($role === 'admin'): ?>
+              <a href="phayao.php"
+                class="block px-10 py-3 hover:bg-white/10">
+                  พะเยา
+              </a>
 
-              <li>
-                <a href="admin/places.php"
-                   class="block px-4 py-3
-                          text-yellow-300
-                          hover:bg-yellow-400/20">
+              <a href="maehongson.php"
+                class="block px-10 py-3 hover:bg-white/10">
+                  แม่ฮ่องสอน
+              </a>
 
-                  <i class="fa-solid fa-shield-halved me-2"></i>
+          </div>
+
+      </div>
+
+      <?php if (!isset($_SESSION['user'])): ?>
+
+          <a href="login.php" class="block px-6 py-4 border-b border-white/10">
+              Login
+          </a>
+
+          <a href="register.php" class="block px-6 py-4">
+              Register
+          </a>
+
+      <?php else: ?>
+
+          <a href="profile.php" class="block px-6 py-4 border-b border-white/10">
+              โปรไฟล์ของฉัน
+          </a>
+
+          <a href="history.php" class="block px-6 py-4 border-b border-white/10">
+              ประวัติการค้นหา
+          </a>
+
+          <?php if ($role === 'admin'): ?>
+              <a href="admin/places.php"
+                class="block px-6 py-4 border-b border-white/10 text-yellow-300">
                   ระบบผู้ดูแล
-
-                </a>
-              </li>
-
-            <?php endif; ?>
-
-            <!-- LOGOUT -->
-            <li>
-              <a href="logout.php"
-                 class="block px-4 py-3
-                        text-red-400
-                        hover:bg-white/10">
-
-                <i class="fa-solid fa-right-from-bracket me-2"></i>
-                Logout
-
               </a>
-            </li>
+          <?php endif; ?>
 
-          </ul>
-
-        </li>
+          <a href="logout.php"
+            class="block px-6 py-4 text-red-400">
+              Logout
+          </a>
 
       <?php endif; ?>
-
-    </ul>
 
   </div>
 
 </nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu"
+     class="hidden md:hidden bg-black/90 text-white">
+
+    <a href="about.php"
+       class="block px-6 py-4 border-b border-white/10">
+        About
+    </a>
+
+    <a href="chaingmai.php"
+       class="block px-6 py-4 border-b border-white/10">
+        เชียงใหม่
+    </a>
+
+    <a href="chiangrai.php"
+       class="block px-6 py-4 border-b border-white/10">
+        เชียงราย
+    </a>
+
+    <a href="tak.php"
+       class="block px-6 py-4 border-b border-white/10">
+        ตาก
+    </a>
+
+    <a href="phayao.php"
+       class="block px-6 py-4 border-b border-white/10">
+        พะเยา
+    </a>
+
+    <a href="maehongson.php"
+       class="block px-6 py-4 border-b border-white/10">
+        แม่ฮ่องสอน
+    </a>
+
+    <?php if (!isset($_SESSION['user'])): ?>
+
+        <a href="login.php"
+           class="block px-6 py-4 border-b border-white/10">
+            Login
+        </a>
+
+        <a href="register.php"
+           class="block px-6 py-4">
+            Register
+        </a>
+
+    <?php else: ?>
+
+        <a href="profile.php"
+           class="block px-6 py-4 border-b border-white/10">
+            โปรไฟล์
+        </a>
+
+        <a href="history.php"
+           class="block px-6 py-4 border-b border-white/10">
+            ประวัติการค้นหา
+        </a>
+
+        <?php if ($role === 'admin'): ?>
+        <a href="admin/places.php"
+           class="block px-6 py-4 border-b border-white/10">
+            ระบบผู้ดูแล
+        </a>
+        <?php endif; ?>
+
+        <a href="logout.php"
+           class="block px-6 py-4 text-red-400">
+            Logout
+        </a>
+
+    <?php endif; ?>
+
+</div>
 
 <!-- ================= HERO ================= -->
 
@@ -779,6 +868,36 @@ session_start();
   window.addEventListener('scroll', revealOnScroll);
 
   revealOnScroll();
+
+  // Mobile Menu Toggle
+  
+
+const menuBtn = document.getElementById('menuBtn');
+const closeMenu = document.getElementById('closeMenu');
+const mobileMenu = document.getElementById('mobileMenu');
+const provinceBtn = document.getElementById('provinceBtn');
+const provinceMenu = document.getElementById('provinceMenu');
+const provinceIcon = document.getElementById('provinceIcon');
+
+menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('hidden');
+});
+
+closeMenu.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+});
+
+provinceBtn.addEventListener('click', () => {
+
+    provinceMenu.classList.toggle('hidden');
+
+    provinceIcon.classList.toggle('fa-chevron-down');
+    provinceIcon.classList.toggle('fa-chevron-up');
+
+});
+
+
+
 </script>
 
 
