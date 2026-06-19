@@ -18,6 +18,32 @@ $days = isset($_GET['days'])
     : 1;
 
 /* ===============================
+   RANDOM SEED 19/6/2026 
+   เพิ่มเงื่อนไขการเก็บ seed และ params ใน session เพื่อให้ผลลัพธ์ไม่เหมือนเดิมทุกครั้งที่โหลดหน้า แต่จะเปลี่ยนเมื่อมีการค้นหาใหม่ด้วย params ที่ต่างออกไป
+=============================== */
+
+if (
+    !isset($_SESSION['recommend_seed']) ||
+    !isset($_SESSION['recommend_params']) ||
+    $_SESSION['recommend_params'] != [
+        $category_id,
+        $group_size,
+        $days
+    ]
+) {
+
+    $_SESSION['recommend_seed'] = rand(1, 999999);
+
+    $_SESSION['recommend_params'] = [
+        $category_id,
+        $group_size,
+        $days
+    ];
+}
+
+$seed = $_SESSION['recommend_seed'];
+
+/* ===============================
    SUITABILITY
 =============================== */
 if ($group_size >= 5) {
@@ -40,7 +66,7 @@ if ($group_size >= 5) {
 $limit = min($days * 3, 12);
 
 /* ===============================
-   MAIN RECOMMEND QUERY
+   MAIN RECOMMEND QUERY แก้ไขตรงนี้ 19/6/2026 random seed เพิ่มเติมเพื่อให้ผลลัพธ์แตกต่างกันในแต่ละครั้งที่ค้นหาใหม่
 =============================== */
 $sql = "
 
@@ -61,7 +87,7 @@ ORDER BY
         ELSE 1
     END,
     COALESCE(p.popularity_score,0) DESC,
-    RAND()
+    RAND($seed)
 
 LIMIT ?
 
@@ -120,7 +146,8 @@ while($row = mysqli_fetch_assoc($result)){
 }
 
 /* ===============================
-   ADDITIONAL RECOMMEND
+   ADDITIONAL RECOMMEND แก้ตรงนี้ 19/6/2026 
+   RAND(" . ($seed + 1000) . ") เพื่อให้ได้ผลลัพธ์ที่ต่างจากชุดหลัก
 =============================== */
 
 $extra_sql = "
@@ -138,7 +165,7 @@ WHERE p.category_id != ?
 
 ORDER BY
     COALESCE(p.popularity_score,0) DESC,
-    RAND()
+    RAND(" . ($seed + 1000) . ") 
 
 LIMIT 3
 
