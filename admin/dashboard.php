@@ -159,7 +159,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <!-- SIDEBAR -->
 
-<div class="fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-emerald-600 via-green-700 to-emerald-900 text-white shadow-2xl">
+<div class="fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-blue-600 via-green-700 to-blue-900 text-white shadow-2xl">
 
 <!-- LOGO -->
 

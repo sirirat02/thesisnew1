@@ -12,7 +12,7 @@
 
 </head>
 
-<body class="bg-gradient-to-b from-emerald-50 via-white to-emerald-100 text-gray-800">
+<body class="bg-gradient-to-b from-blue-50 via-white to-blue-100 text-gray-800">
 
 <!-- ================= HERO ================= -->
 <section class="relative h-[55vh] bg-cover bg-center"
@@ -26,7 +26,7 @@
 
         <div>
 
-            <span class="inline-block bg-emerald-500/90 text-white
+            <span class="inline-block bg-blue-500/90 text-white
                          px-5 py-2 rounded-full text-sm font-semibold mb-5">
 
                  วัฒนธรรมล้านนา
@@ -52,12 +52,12 @@
 <section class="max-w-5xl mx-auto px-6 pb-16 -mt-16 relative z-20">
 
     <div class="bg-white/95 backdrop-blur-sm
-                rounded-3xl shadow-xl overflow-hidden border border-emerald-100">
+                rounded-3xl shadow-xl overflow-hidden border border-blue-100">
 
         <!-- HEADER -->
-        <div class="bg-emerald-50 border-b border-emerald-100 px-8 py-6">
+        <div class="bg-blue-50 border-b border-blue-100 px-8 py-6">
 
-            <h2 class="text-2xl font-bold text-emerald-700">
+            <h2 class="text-2xl font-bold text-blue-700">
                 เอกลักษณ์ของวัดล้านนา
             </h2>
 
@@ -96,7 +96,7 @@
             <!-- TITLE -->
             <div class="mb-6">
 
-                <span class="inline-block bg-emerald-100 text-emerald-700
+                <span class="inline-block bg-blue-100 text-blue-700
                              px-4 py-2 rounded-full text-sm font-semibold mb-4">
 
                     ✨ ศิลปะล้านนา
@@ -113,9 +113,9 @@
             <div class="grid md:grid-cols-3 gap-5 mb-10">
 
                 <!-- ITEM -->
-                <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-100">
+                <div class="bg-blue-50 rounded-2xl p-5 border border-blue-100">
 
-                    <div class="text-emerald-600 text-2xl mb-4">
+                    <div class="text-blue-600 text-2xl mb-4">
                         <i class="fa-solid fa-gopuram"></i>
                     </div>
 
@@ -131,9 +131,9 @@
                 </div>
 
                 <!-- ITEM -->
-                <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-100">
+                <div class="bg-blue-50 rounded-2xl p-5 border border-blue-100">
 
-                    <div class="text-emerald-600 text-2xl mb-4">
+                    <div class="text-blue-600 text-2xl mb-4">
                         <i class="fa-solid fa-pencil-ruler"></i>
                     </div>
 
@@ -149,9 +149,9 @@
                 </div>
 
                 <!-- ITEM -->
-                <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-100">
+                <div class="bg-blue-50 rounded-2xl p-5 border border-blue-100">
 
-                    <div class="text-emerald-600 text-2xl mb-4">
+                    <div class="text-blue-600 text-2xl mb-4">
                         <i class="fa-solid fa-leaf"></i>
                     </div>
 
@@ -169,7 +169,7 @@
             </div>
 
             <!-- QUOTE -->
-            <div class="bg-gradient-to-r from-emerald-500 to-emerald-600
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600
                         text-white rounded-3xl p-8 text-center shadow-lg">
 
                 <p class="text-xl md:text-2xl font-light leading-relaxed">
@@ -184,7 +184,7 @@
 
                 <a href="../index.php"
                    class="inline-flex items-center gap-3
-                          bg-emerald-500 hover:bg-emerald-600
+                          bg-blue-500 hover:bg-blue-600
                           text-white px-8 py-4
                           rounded-2xl font-semibold
                           transition shadow-lg">

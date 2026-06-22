@@ -153,7 +153,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         <div class="flex items-center gap-3">
 
             <div class="w-11 h-11 rounded-2xl
-                        bg-emerald-500 text-white
+                        bg-blue-500 text-white
                         flex items-center justify-center shadow">
 
                 <i class="fa-solid fa-location-dot"></i>
@@ -188,7 +188,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             </a>
 
             <a href="/thesis/index.php"
-               class="bg-emerald-500 hover:bg-emerald-600
+               class="bg-blue-500 hover:bg-blue-600
                       text-white px-4 py-2 rounded-xl
                       text-sm font-semibold transition shadow">
 
@@ -211,7 +211,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
         <h2 class="text-3xl font-bold mb-2">
 
-            <i class="fa-solid fa-plus text-emerald-500"></i>
+            <i class="fa-solid fa-plus text-blue-500"></i>
             เพิ่มสถานที่ท่องเที่ยว
 
         </h2>
@@ -243,7 +243,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 placeholder="เช่น ภูชี้ฟ้า"
                 class="w-full border border-gray-200
                        rounded-2xl px-4 py-3
-                       focus:ring-2 focus:ring-emerald-400
+                       focus:ring-2 focus:ring-blue-400
                        focus:outline-none">
 
             </div>
@@ -261,7 +261,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 placeholder="รายละเอียดสถานที่ท่องเที่ยว..."
                 class="w-full border border-gray-200
                        rounded-2xl px-4 py-3
-                       focus:ring-2 focus:ring-emerald-400
+                       focus:ring-2 focus:ring-blue-400
                        focus:outline-none"></textarea>
 
             </div>
@@ -282,7 +282,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                     placeholder="เช่น เชียงราย"
                     class="w-full border border-gray-200
                            rounded-2xl px-4 py-3
-                           focus:ring-2 focus:ring-emerald-400
+                           focus:ring-2 focus:ring-blue-400
                            focus:outline-none">
 
                 </div>
@@ -300,7 +300,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                     placeholder="เช่น 1"
                     class="w-full border border-gray-200
                            rounded-2xl px-4 py-3
-                           focus:ring-2 focus:ring-emerald-400
+                           focus:ring-2 focus:ring-blue-400
                            focus:outline-none">
 
                 </div>
@@ -323,7 +323,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                     placeholder="18.7883"
                     class="w-full border border-gray-200
                            rounded-2xl px-4 py-3
-                           focus:ring-2 focus:ring-emerald-400
+                           focus:ring-2 focus:ring-blue-400
                            focus:outline-none">
 
                 </div>
@@ -341,7 +341,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                     placeholder="98.9853"
                     class="w-full border border-gray-200
                            rounded-2xl px-4 py-3
-                           focus:ring-2 focus:ring-emerald-400
+                           focus:ring-2 focus:ring-blue-400
                            focus:outline-none">
 
                 </div>
@@ -353,19 +353,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <label class="block text-sm font-semibold mb-3">
 
-                    <i class="fa-regular fa-images text-emerald-500"></i>
+                    <i class="fa-regular fa-images text-blue-500"></i>
                     รูปภาพสถานที่
 
                 </label>
 
-                <div class="border-2 border-dashed border-emerald-300
+                <div class="border-2 border-dashed border-blue-300
                             rounded-3xl p-10
-                            bg-emerald-50">
+                            bg-blue-50">
 
                     <div class="text-center mb-6">
 
                         <i class="fa-regular fa-image
-                                  text-5xl text-emerald-400 mb-4"></i>
+                                  text-5xl text-blue-400 mb-4"></i>
 
                         <h3 class="font-bold text-lg mb-2">
                             อัปโหลดรูปภาพสถานที่
@@ -392,9 +392,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                            file:mr-4 file:py-3 file:px-5
                            file:rounded-full file:border-0
                            file:text-sm file:font-semibold
-                           file:bg-emerald-500
+                           file:bg-blue-500
                            file:text-white
-                           hover:file:bg-emerald-600">
+                           hover:file:bg-blue-600">
 
                     <!-- PREVIEW -->
                     <div id="previewContainer"
@@ -410,7 +410,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <button
                 type="submit"
-                class="bg-emerald-500 hover:bg-emerald-600
+                class="bg-blue-500 hover:bg-blue-600
                        text-white px-6 py-3 rounded-2xl
                        font-semibold transition shadow">
 
@@ -492,7 +492,7 @@ function renderPreview() {
 
                 ${index === 0 ? `
                     <div class="absolute bottom-2 left-2
-                                bg-emerald-500 text-white
+                                bg-blue-500 text-white
                                 text-xs px-3 py-1 rounded-full shadow">
                         Cover
                     </div>

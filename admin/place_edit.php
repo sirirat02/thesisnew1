@@ -258,7 +258,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         <div class="flex items-center gap-3">
 
             <div class="w-10 h-10 rounded-xl
-                        bg-emerald-500 text-white
+                        bg-blue-500 text-white
                         flex items-center justify-center">
 
                 <i class="fa-solid fa-location-dot"></i>
@@ -291,7 +291,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             </a>
 
             <a href="/thesis/index.php"
-               class="bg-emerald-500 hover:bg-emerald-600
+               class="bg-blue-500 hover:bg-blue-600
                       text-white px-4 py-2 rounded-xl
                       text-sm font-semibold">
 
@@ -313,7 +313,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
         <h1 class="text-3xl font-bold mb-2">
 
-            <i class="fa-solid fa-pen-to-square text-emerald-500"></i>
+            <i class="fa-solid fa-pen-to-square text-blue-500"></i>
             แก้ไขสถานที่
 
         </h1>
@@ -345,7 +345,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 required
                 class="w-full border border-gray-200 rounded-xl
                        px-4 py-3
-                       focus:ring-2 focus:ring-emerald-400
+                       focus:ring-2 focus:ring-blue-400
                        focus:outline-none">
 
             </div>
@@ -363,7 +363,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 required
                 class="w-full border border-gray-200 rounded-xl
                        px-4 py-3
-                       focus:ring-2 focus:ring-emerald-400
+                       focus:ring-2 focus:ring-blue-400
                        focus:outline-none"><?= htmlspecialchars($data['description']) ?></textarea>
 
             </div>
@@ -445,7 +445,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <label class="block text-sm font-semibold mb-3">
 
-                    <i class="fa-solid fa-image text-emerald-500"></i>
+                    <i class="fa-solid fa-image text-blue-500"></i>
                     Cover Image
 
                 </label>
@@ -496,8 +496,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                        file:mr-4 file:py-2 file:px-4
                        file:rounded-full file:border-0
                        file:text-sm file:font-semibold
-                       file:bg-emerald-500 file:text-white
-                       hover:file:bg-emerald-600">
+                       file:bg-blue-500 file:text-white
+                       hover:file:bg-blue-600">
 
             </div>
 
@@ -506,7 +506,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <h3 class="text-lg font-bold mb-4">
 
-                    <i class="fa-regular fa-images text-emerald-500"></i>
+                    <i class="fa-regular fa-images text-blue-500"></i>
                     รูปภาพปัจจุบัน
 
                 </h3>
@@ -548,7 +548,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <label class="block text-sm font-semibold mb-3">
 
-                    <i class="fa-solid fa-cloud-arrow-up text-emerald-500"></i>
+                    <i class="fa-solid fa-cloud-arrow-up text-blue-500"></i>
                     เพิ่มรูปภาพใหม่
 
                 </label>
@@ -562,8 +562,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                        file:mr-4 file:py-2 file:px-4
                        file:rounded-full file:border-0
                        file:text-sm file:font-semibold
-                       file:bg-emerald-500 file:text-white
-                       hover:file:bg-emerald-600">
+                       file:bg-blue-500 file:text-white
+                       hover:file:bg-blue-600">
 
             </div>
 
@@ -572,7 +572,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                 <button
                 type="submit"
-                class="bg-emerald-500 hover:bg-emerald-600
+                class="bg-blue-500 hover:bg-blue-600
                        text-white px-6 py-3 rounded-xl
                        font-semibold transition">
 

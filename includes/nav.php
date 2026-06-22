@@ -1,4 +1,4 @@
-<nav class="bg-emerald-500 text-white px-6 py-4 shadow">
+<nav class="bg-blue-500 text-white px-6 py-4 shadow">
     <div class="max-w-6xl mx-auto flex justify-between">
         <a href="index.php" class="font-bold">Tourism System</a>
 

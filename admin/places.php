@@ -139,7 +139,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         <div class="flex items-center gap-3">
 
             <div class="w-12 h-12 rounded-2xl
-                        bg-emerald-500 text-white
+                        bg-blue-500 text-white
                         flex items-center justify-center shadow-md">
 
                 <i class="fa-solid fa-location-dot text-lg"></i>
@@ -168,7 +168,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                class="h-14 min-w-[190px]
                       px-4 rounded-2xl
                       bg-white border border-gray-200
-                      hover:border-emerald-300 hover:bg-emerald-50
+                      hover:border-blue-300 hover:bg-blue-50
                       shadow-sm transition
                       flex items-center gap-3">
 
@@ -232,7 +232,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             <!-- ADD -->
             <a href="/thesis/admin/place_add.php"
                class="h-12 px-5 rounded-2xl
-                      bg-emerald-500 hover:bg-emerald-600
+                      bg-blue-500 hover:bg-blue-600
                       text-white font-semibold
                       shadow-md transition
                       flex items-center gap-2">
@@ -277,7 +277,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <div class="flex flex-col items-end gap-3">
 
                     <!-- PAGE -->
-                    <div class="bg-emerald-50 text-emerald-700
+                    <div class="bg-blue-50 text-blue-700
                                 px-4 py-2 rounded-xl
                                 text-sm font-semibold">
 
@@ -309,7 +309,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                                            border border-gray-200
                                            focus:outline-none
                                            focus:ring-2
-                                           focus:ring-emerald-400">
+                                           focus:ring-blue-400">
 
                             </div>
 
@@ -317,7 +317,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                             <button
                                 type="submit"
                                 class="px-3 py-2 rounded-lg
-                                       bg-emerald-500 hover:bg-emerald-600
+                                       bg-blue-500 hover:bg-blue-600
                                        text-white text-xs font-semibold
                                        transition">
 
@@ -458,7 +458,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                         <!-- PROVINCE -->
                         <td class="px-6 py-5">
 
-                            <span class="bg-emerald-50 text-emerald-700
+                            <span class="bg-blue-50 text-blue-700
                                          text-sm px-4 py-2 rounded-full
                                          font-semibold">
 
@@ -558,7 +558,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                     <a href="?page=<?= $i ?>&keyword=<?= urlencode($keyword) ?>"
                        class="px-4 py-2 rounded-xl font-semibold transition
                        <?= ($i == $page)
-                            ? 'bg-emerald-500 text-white'
+                            ? 'bg-blue-500 text-white'
                             : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
                        ?>">
 

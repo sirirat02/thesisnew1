@@ -342,7 +342,7 @@ include __DIR__ . '/includes/nav.php';
     <div class="bg-white rounded-3xl shadow-lg p-6 text-center">
 
         <!-- PROFILE IMAGE -->
-        <div class="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden border-4 border-emerald-100 shadow">
+        <div class="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden border-4 border-blue-100 shadow">
 
             <?php if (!empty($data['profile_image'])): ?>
 
@@ -373,7 +373,7 @@ include __DIR__ . '/includes/nav.php';
         <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold
         <?= $data['role'] === 'admin'
             ? 'bg-yellow-100 text-yellow-700'
-            : 'bg-emerald-100 text-emerald-700'
+            : 'bg-blue-100 text-blue-700'
         ?>">
 
             <?= htmlspecialchars($data['role']) ?>
@@ -386,7 +386,7 @@ include __DIR__ . '/includes/nav.php';
         <a href="history.php"
            class="flex items-center justify-between
                   px-4 py-3 rounded-xl
-                  bg-gray-50 hover:bg-emerald-50
+                  bg-gray-50 hover:bg-blue-50
                   transition mb-3">
 
             <span>
@@ -394,7 +394,7 @@ include __DIR__ . '/includes/nav.php';
                 ประวัติการค้นหา
             </span>
 
-            <span class="bg-emerald-500 text-white text-xs px-2 py-1 rounded-full">
+            <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
                 <?= $count_history ?>
             </span>
 
@@ -404,7 +404,7 @@ include __DIR__ . '/includes/nav.php';
         <a href="recommend.php"
            class="flex items-center justify-between
                   px-4 py-3 rounded-xl
-                  bg-gray-50 hover:bg-emerald-50
+                  bg-gray-50 hover:bg-blue-50
                   transition mb-3">
 
             <span>
@@ -466,7 +466,7 @@ include __DIR__ . '/includes/nav.php';
 
             <h3 class="text-lg font-bold mb-5">
 
-                <i class="fa-solid fa-user-pen text-emerald-500 me-2"></i>
+                <i class="fa-solid fa-user-pen text-blue-500 me-2"></i>
                 ข้อมูลส่วนตัว
 
             </h3>
@@ -501,7 +501,7 @@ include __DIR__ . '/includes/nav.php';
                     name="username"
                     required
                     value="<?= htmlspecialchars($data['username']) ?>"
-                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-300">
+                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
 
                 </div>
 
@@ -516,7 +516,7 @@ include __DIR__ . '/includes/nav.php';
                     name="email"
                     required
                     value="<?= htmlspecialchars($data['email']) ?>"
-                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-300">
+                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
 
                 </div>
 
@@ -530,14 +530,14 @@ include __DIR__ . '/includes/nav.php';
                     type="text"
                     name="full_name"
                     value="<?= htmlspecialchars($data['full_name'] ?? '') ?>"
-                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-300">
+                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
 
                 </div>
 
                 <button
                 type="submit"
                 name="update_profile"
-                class="bg-emerald-500 hover:bg-emerald-600
+                class="bg-blue-500 hover:bg-blue-600
                        text-white px-6 py-3 rounded-xl
                        font-medium transition">
 
@@ -555,7 +555,7 @@ include __DIR__ . '/includes/nav.php';
 
             <h3 class="text-lg font-bold mb-5">
 
-                <i class="fa-solid fa-lock text-emerald-500 me-2"></i>
+                <i class="fa-solid fa-lock text-blue-500 me-2"></i>
                 เปลี่ยนรหัสผ่าน
 
             </h3>
@@ -572,7 +572,7 @@ include __DIR__ . '/includes/nav.php';
                     type="password"
                     name="old_password"
                     required
-                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-300">
+                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
 
                 </div>
 
@@ -586,7 +586,7 @@ include __DIR__ . '/includes/nav.php';
                     type="password"
                     name="new_password"
                     required
-                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-300">
+                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
 
                 </div>
 
@@ -600,7 +600,7 @@ include __DIR__ . '/includes/nav.php';
                     type="password"
                     name="confirm_password"
                     required
-                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-300">
+                    class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
 
                 </div>
 

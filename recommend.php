@@ -226,9 +226,9 @@ include __DIR__ . '/includes/nav.php';
 
         <!-- HEADER -->
         <div class="px-6 py-5 border-b
-                    text-center bg-emerald-50">
+                    text-center bg-blue-50">
 
-            <h1 class="text-2xl font-bold text-emerald-700">
+            <h1 class="text-2xl font-bold text-blue-700">
 
                 ✨ แนะนำสถานที่ท่องเที่ยวภาคเหนือ
 
@@ -298,7 +298,7 @@ include __DIR__ . '/includes/nav.php';
                                rounded-xl px-4 py-3
                                focus:outline-none
                                focus:ring-2
-                               focus:ring-emerald-400">
+                               focus:ring-blue-400">
 
                 </div>
 
@@ -324,7 +324,7 @@ include __DIR__ . '/includes/nav.php';
                                rounded-xl px-4 py-3
                                focus:outline-none
                                focus:ring-2
-                               focus:ring-emerald-400">
+                               focus:ring-blue-400">
 
                 </div>
 
@@ -351,7 +351,7 @@ include __DIR__ . '/includes/nav.php';
                                rounded-xl px-4 py-3
                                focus:outline-none
                                focus:ring-2
-                               focus:ring-emerald-400">
+                               focus:ring-blue-400">
 
                 </div>
 
@@ -373,7 +373,7 @@ include __DIR__ . '/includes/nav.php';
                                rounded-xl px-4 py-3
                                focus:outline-none
                                focus:ring-2
-                               focus:ring-emerald-400">
+                               focus:ring-blue-400">
 
                         <option value="">
                             -- เลือกสไตล์การท่องเที่ยว --
@@ -424,7 +424,7 @@ include __DIR__ . '/includes/nav.php';
                     id="submitBtn"
 
                     class="w-full
-                           bg-emerald-500 hover:bg-emerald-600
+                           bg-blue-500 hover:bg-blue-600
                            transition duration-200
                            text-white py-3 rounded-full
                            font-bold text-base shadow-md">
@@ -457,15 +457,15 @@ include __DIR__ . '/includes/nav.php';
         <div class="flex justify-center mb-5">
 
             <div class="w-16 h-16 border-4
-                        border-emerald-200
-                        border-t-emerald-500
+                        border-blue-200
+                        border-t-blue-500
                         rounded-full animate-spin">
             </div>
 
         </div>
 
         <h2 class="text-xl font-bold
-                   text-emerald-600 mb-2">
+                   text-blue-600 mb-2">
 
             กรุณารอสักครู่...
 

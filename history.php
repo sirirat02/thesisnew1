@@ -84,7 +84,7 @@ include __DIR__ . '/includes/nav.php';
   <div class="flex items-center justify-between mb-6">
     <div>
       <h2 class="text-2xl font-bold">
-        <i class="fa-solid fa-clock-rotate-left text-emerald-500"></i>
+        <i class="fa-solid fa-clock-rotate-left text-blue-500"></i>
         ประวัติการค้นหา
       </h2>
       <p class="text-gray-500 text-sm mt-1">
@@ -94,7 +94,7 @@ include __DIR__ . '/includes/nav.php';
 
     <div class="flex gap-2">
       <a href="recommend.php"
-         class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+         class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
         <i class="fa-solid fa-plus me-1"></i> ค้นหาใหม่
       </a>
       <?php if ($num_rows > 0): ?>
@@ -116,7 +116,7 @@ include __DIR__ . '/includes/nav.php';
         เริ่มต้นค้นหาสถานที่ท่องเที่ยวที่เหมาะกับคุณได้เลย
       </p>
       <a href="recommend.php"
-         class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-full font-semibold transition">
+         class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-semibold transition">
         <i class="fa-solid fa-magnifying-glass me-1"></i> เริ่มค้นหา
       </a>
     </div>
@@ -140,14 +140,14 @@ include __DIR__ . '/includes/nav.php';
         ?>
 
         <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition p-5
-                    border-l-4 border-emerald-400">
+                    border-l-4 border-blue-400">
 
           <div class="flex items-start justify-between gap-4 flex-wrap">
 
             <!-- LEFT: details -->
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2 mb-2">
-                <span class="bg-emerald-100 text-emerald-700 text-xs font-semibold px-2 py-1 rounded">
+                <span class="bg-blue-100 text-blue-700 text-xs font-semibold px-2 py-1 rounded">
                   <?= htmlspecialchars($row['travel_style']) ?>
                 </span>
                 <?php if (!empty($row['category_name'])): ?>
@@ -185,7 +185,7 @@ include __DIR__ . '/includes/nav.php';
                 </div>
                 <div>
                   <div class="text-gray-400 text-xs">เฉลี่ย/คน</div>
-                  <div class="font-semibold text-emerald-600">
+                  <div class="font-semibold text-blue-600">
                     <?= number_format($cost_per_person) ?> ฿
                   </div>
                 </div>
@@ -195,7 +195,7 @@ include __DIR__ . '/includes/nav.php';
             <!-- RIGHT: actions -->
             <div class="flex flex-col gap-2 shrink-0">
               <a href="<?= $rerun_url ?>"
-                 class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-xs font-medium transition text-center">
+                 class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-medium transition text-center">
                 <i class="fa-solid fa-rotate-right me-1"></i> ค้นหาซ้ำ
               </a>
               <a href="?delete=<?= $row['id'] ?>"

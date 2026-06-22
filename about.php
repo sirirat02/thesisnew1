@@ -21,15 +21,15 @@ session_start();
 <!-- ================= OVERLAY ================= -->
 <div class="absolute inset-0 bg-gradient-to-b
             from-black/70
-            via-emerald-950/70
-            to-emerald-950/90">
+            via-blue-950/70
+            to-blue-950/90">
 </div>
 
 <!-- ================= CONTENT WRAPPER ================= -->
 <div class="relative z-10">
 
 <!-- ================= NAVBAR ================= -->
-<nav class="bg-emerald-950/70 backdrop-blur-md border-b border-white/10">
+<nav class="bg-blue-950/70 backdrop-blur-md border-b border-white/10">
 
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center">
 
@@ -37,7 +37,7 @@ session_start();
         <button onclick="history.back()"
                 class="flex items-center gap-2
                        text-white text-sm
-                       hover:text-emerald-300
+                       hover:text-blue-300
                        transition">
 
             <i class="fa-solid fa-arrow-left"></i>
@@ -63,7 +63,7 @@ session_start();
                  px-5 py-2 rounded-full
                  text-sm font-medium mb-6">
 
-        <i class="fa-solid fa-earth-asia text-emerald-300"></i>
+        <i class="fa-solid fa-earth-asia text-blue-300"></i>
         Northern Thailand Travel
 
     </span>
@@ -71,7 +71,7 @@ session_start();
     <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
 
         ระบบแนะนำการท่องเที่ยว
-        <span class="block text-emerald-300 mt-2">
+        <span class="block text-blue-300 mt-2">
             ภาคเหนือประเทศไทย
         </span>
 
@@ -99,7 +99,7 @@ session_start();
         <div class="flex items-center gap-4 mb-6">
 
             <div class="w-14 h-14 rounded-2xl
-                        bg-emerald-500 text-white
+                        bg-blue-500 text-white
                         flex items-center justify-center shadow-lg">
 
                 <i class="fa-solid fa-circle-info text-xl"></i>
@@ -159,7 +159,7 @@ session_start();
                     rounded-3xl p-7 shadow-xl">
 
             <div class="w-14 h-14 rounded-2xl
-                        bg-emerald-500 text-white
+                        bg-blue-500 text-white
                         flex items-center justify-center
                         shadow-lg mb-5">
 
@@ -257,7 +257,7 @@ session_start();
 </section>
 
 <!-- ================= FOOTER ================= -->
-<footer class="bg-emerald-950/80 backdrop-blur-md
+<footer class="bg-blue-950/80 backdrop-blur-md
                border-t border-white/10
                text-gray-300 py-10 text-center">
 
@@ -265,25 +265,25 @@ session_start();
         Northern Thailand Travel
     </h3>
 
-    <p class="text-emerald-200 mb-5">
+    <p class="text-blue-200 mb-5">
         Discover • Plan • Travel
     </p>
-
+<!-- 
     <div class="flex justify-center gap-5 text-lg mb-5">
 
-        <a href="#" class="hover:text-emerald-300 transition">
+        <a href="#" class="hover:text-blue-300 transition">
             <i class="fa-brands fa-facebook"></i>
         </a>
 
-        <a href="#" class="hover:text-emerald-300 transition">
+        <a href="#" class="hover:text-blue-300 transition">
             <i class="fa-brands fa-instagram"></i>
         </a>
 
-        <a href="#" class="hover:text-emerald-300 transition">
+        <a href="#" class="hover:text-blue-300 transition">
             <i class="fa-brands fa-youtube"></i>
         </a>
 
-    </div>
+    </div> -->
 
     <p class="text-sm text-gray-400">
         © <?= date('Y') ?> Northern Thailand Travel Recommendation

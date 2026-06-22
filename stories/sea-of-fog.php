@@ -21,13 +21,13 @@ session_start();
  style="background-image:url('images/sea_of_fog.webp')">
 
   <!-- overlay -->
-  <div class="absolute inset-0 bg-emerald-950/60"></div>
+  <div class="absolute inset-0 bg-blue-950/60"></div>
 
   <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
 
     <div>
 
-      <span class="inline-block bg-emerald-500/90
+      <span class="inline-block bg-blue-500/90
                    text-white px-5 py-2 rounded-full
                    text-sm font-medium mb-5 shadow-lg">
 
@@ -50,7 +50,7 @@ session_start();
                 bg-white shadow-xl
                 -mt-20 rounded-[2rem]
                 relative z-10
-                border border-emerald-100">
+                border border-blue-100">
 
   <p class="text-gray-700 mb-6 leading-relaxed text-lg">
     ทะเลหมอก คือหนึ่งในภาพธรรมชาติที่หลายคนหลงรัก
@@ -81,11 +81,11 @@ session_start();
   </p>
 
   <!-- ================= INFO BOX ================= -->
-  <div class="bg-emerald-50
-              border-l-4 border-emerald-500
+  <div class="bg-blue-50
+              border-l-4 border-blue-500
               p-6 rounded-2xl mb-8">
 
-    <h3 class="font-bold text-emerald-700 mb-3 text-lg">
+    <h3 class="font-bold text-blue-700 mb-3 text-lg">
       📌 รู้ไว้ก่อนออกเดินทาง
     </h3>
 
@@ -106,7 +106,7 @@ session_start();
 
     <a href="../index.php"
        class="inline-flex items-center gap-3
-              bg-emerald-500 hover:bg-emerald-600
+              bg-blue-500 hover:bg-blue-600
               text-white px-8 py-4
               rounded-full font-semibold text-lg
               transition shadow-lg">

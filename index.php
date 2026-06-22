@@ -439,14 +439,14 @@ session_start();
 </style>
 
 <section id="provinces"
-         class="py-20 bg-gradient-to-b from-emerald-50 via-white to-emerald-100">
+         class="py-20 bg-gradient-to-b from-blue-50 via-white to-blue-100">
 
   <div class="max-w-7xl mx-auto px-6">
 
     <!-- TITLE -->
     <div class="text-center mb-14 reveal">
 
-      <span class="inline-block bg-emerald-100 text-emerald-700
+      <span class="inline-block bg-blue-100 text-blue-700
                    px-4 py-2 rounded-full text-sm font-semibold mb-4">
 
         ✨ จังหวัดแนะนำ
@@ -501,7 +501,7 @@ session_start();
         <div class="p-6 text-center">
 
           <div class="flex items-center justify-center gap-2
-                      text-emerald-600 mb-4 text-sm font-medium">
+                      text-blue-600 mb-4 text-sm font-medium">
 
             <i class="fa-solid fa-location-dot"></i>
             จังหวัดยอดนิยมของภาคเหนือ
@@ -510,7 +510,7 @@ session_start();
 
           <button
             class="inline-flex items-center justify-center gap-3
-                   bg-emerald-500 hover:bg-emerald-600
+                   bg-blue-500 hover:bg-blue-600
                    text-white px-6 py-3 rounded-xl
                    font-semibold transition">
 
@@ -557,7 +557,7 @@ session_start();
         <div class="p-6 text-center">
 
           <div class="flex items-center justify-center gap-2
-                      text-emerald-600 mb-4 text-sm font-medium">
+                      text-blue-600 mb-4 text-sm font-medium">
 
             <i class="fa-solid fa-location-dot"></i>
             เมืองศิลปะและธรรมชาติ
@@ -566,7 +566,7 @@ session_start();
 
           <button
             class="inline-flex items-center justify-center gap-3
-                   bg-emerald-500 hover:bg-emerald-600
+                   bg-blue-500 hover:bg-blue-600
                    text-white px-6 py-3 rounded-xl
                    font-semibold transition">
 
@@ -613,7 +613,7 @@ session_start();
         <div class="p-6 text-center">
 
           <div class="flex items-center justify-center gap-2
-                      text-emerald-600 mb-4 text-sm font-medium">
+                      text-blue-600 mb-4 text-sm font-medium">
 
             <i class="fa-solid fa-location-dot"></i>
             เมืองสโลว์ไลฟ์ภาคเหนือ
@@ -622,7 +622,7 @@ session_start();
 
           <button
             class="inline-flex items-center justify-center gap-3
-                   bg-emerald-500 hover:bg-emerald-600
+                   bg-blue-500 hover:bg-blue-600
                    text-white px-6 py-3 rounded-xl
                    font-semibold transition">
 
@@ -669,7 +669,7 @@ session_start();
         <div class="p-6 text-center">
 
           <div class="flex items-center justify-center gap-2
-                      text-emerald-600 mb-4 text-sm font-medium">
+                      text-blue-600 mb-4 text-sm font-medium">
 
             <i class="fa-solid fa-location-dot"></i>
             ธรรมชาติและวัฒนธรรม
@@ -678,7 +678,7 @@ session_start();
 
           <button
             class="inline-flex items-center justify-center gap-3
-                   bg-emerald-500 hover:bg-emerald-600
+                   bg-blue-500 hover:bg-blue-600
                    text-white px-6 py-3 rounded-xl
                    font-semibold transition">
 
@@ -725,7 +725,7 @@ session_start();
         <div class="p-6 text-center">
 
           <div class="flex items-center justify-center gap-2
-                      text-emerald-600 mb-4 text-sm font-medium">
+                      text-blue-600 mb-4 text-sm font-medium">
 
             <i class="fa-solid fa-location-dot"></i>
             สายธรรมชาติห้ามพลาด
@@ -734,7 +734,7 @@ session_start();
 
           <button
             class="inline-flex items-center justify-center gap-3
-                   bg-emerald-500 hover:bg-emerald-600
+                   bg-blue-500 hover:bg-blue-600
                    text-white px-6 py-3 rounded-xl
                    font-semibold transition">
 
@@ -775,12 +775,12 @@ session_start();
 
       <!-- STORY -->
       <a href="stories/cafe-chiangmai.php"
-         class="reveal delay-1 bg-emerald-50 hover:bg-emerald-100
+         class="reveal delay-1 bg-blue-50 hover:bg-blue-100
                 rounded-3xl p-8
                 transition duration-300
                 shadow-sm hover:shadow-lg">
 
-        <div class="text-emerald-600 text-3xl mb-4">
+        <div class="text-blue-600 text-3xl mb-4">
           <i class="fa-solid fa-mug-hot"></i>
         </div>
 
@@ -797,12 +797,12 @@ session_start();
 
       <!-- STORY -->
       <a href="stories/sea-of-fog.php"
-         class="reveal delay-2 bg-emerald-50 hover:bg-emerald-100
+         class="reveal delay-2 bg-blue-50 hover:bg-blue-100
                 rounded-3xl p-8
                 transition duration-300
                 shadow-sm hover:shadow-lg">
 
-        <div class="text-emerald-600 text-3xl mb-4">
+        <div class="text-blue-600 text-3xl mb-4">
           <i class="fa-solid fa-cloud"></i>
         </div>
 
@@ -819,12 +819,12 @@ session_start();
 
       <!-- STORY -->
       <a href="stories/lanna-culture.php"
-         class="reveal delay-3 bg-emerald-50 hover:bg-emerald-100
+         class="reveal delay-3 bg-blue-50 hover:bg-blue-100
                 rounded-3xl p-8
                 transition duration-300
                 shadow-sm hover:shadow-lg">
 
-        <div class="text-emerald-600 text-3xl mb-4">
+        <div class="text-blue-600 text-3xl mb-4">
           <i class="fa-solid fa-landmark"></i>
         </div>
 
@@ -904,13 +904,13 @@ provinceBtn.addEventListener('click', () => {
 
 <!-- ================= FOOTER ================= -->
 
-<footer class="bg-emerald-700 text-white py-10 text-center">
+<footer class="bg-blue-700 text-white py-10 text-center">
 
   <p class="text-lg font-semibold">
      Tourism Recommendation System
   </p>
 
-  <p class="text-sm text-emerald-100 mt-2">
+  <p class="text-sm text-blue-100 mt-2">
     Discover • Travel • Experience
   </p>
 

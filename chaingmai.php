@@ -21,7 +21,7 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 <style>
 
 body{
-    background:#f4fff7;
+    background:#f0f9ff;
     font-family:'Segoe UI', sans-serif;
 }
 
@@ -108,7 +108,7 @@ body{
 <body>
 
 <!-- ================= NAVBAR ================= -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm py-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm py-3">
 
     <div class="container position-relative">
 
@@ -126,7 +126,7 @@ body{
 
         <!-- RIGHT -->
         <a href="recommend.php"
-           class="btn btn-light btn-sm position-absolute end-0 text-success fw-semibold">
+           class="btn btn-light btn-sm position-absolute end-0 text-primary fw-semibold">
             <i class="fa-solid fa-location-dot me-1"></i>
             เริ่มต้น
         </a>
@@ -140,7 +140,7 @@ body{
 
     <div class="container">
 
-        <span class="badge bg-success rounded-pill px-4 py-2 mb-3">
+        <span class="badge bg-primary rounded-pill px-4 py-2 mb-3">
             <i class="fa-solid fa-location-dot me-1"></i>
             จังหวัดเชียงใหม่
         </span>
@@ -167,7 +167,7 @@ body{
 
             <div class="d-flex align-items-center mb-4">
 
-                <div class="bg-success-subtle text-success rounded-circle
+                <div class="bg-primary-subtle text-primary rounded-circle
                             d-flex align-items-center justify-content-center me-3"
                      style="width:65px;height:65px;">
 
@@ -385,7 +385,7 @@ body{
 
                         <div class="card-body p-4">
 
-                            <span class="badge bg-success rounded-pill place-badge mb-3">
+                            <span class="badge bg-primary rounded-pill place-badge mb-3">
                                 อนุรักษ์สัตว์
                             </span>
 
@@ -425,7 +425,7 @@ body{
 
                         <div class="card-body p-4">
 
-                            <span class="badge bg-success rounded-pill place-badge mb-3">
+                            <span class="badge bg-primary rounded-pill place-badge mb-3">
                                 หมู่บ้านธรรมชาติ
                             </span>
 
@@ -591,12 +591,12 @@ body{
             <div class="d-flex justify-content-center gap-3 mt-5">
 
                 <a href="?page=1"
-                   class="btn <?= $page == 1 ? 'btn-success' : 'btn-outline-success' ?> page-btn">
+                   class="btn <?= $page == 1 ? 'btn-primary' : 'btn-outline-primary' ?> page-btn">
                     1
                 </a>
 
                 <a href="?page=2"
-                   class="btn <?= $page == 2 ? 'btn-success' : 'btn-outline-success' ?> page-btn">
+                   class="btn <?= $page == 2 ? 'btn-primary' : 'btn-outline-primary' ?> page-btn">
                     2
                 </a>
 
@@ -626,7 +626,7 @@ body{
 
                     <div class="activity-card shadow-sm p-4 h-100">
 
-                        <div class="text-success fs-1 mb-3">
+                        <div class="text-primary fs-1 mb-3">
                             <i class="fa-solid fa-landmark"></i>
                         </div>
 
@@ -648,7 +648,7 @@ body{
 
                     <div class="activity-card shadow-sm p-4 h-100">
 
-                        <div class="text-success fs-1 mb-3">
+                        <div class="text-primary fs-1 mb-3">
                             <i class="fa-solid fa-mug-hot"></i>
                         </div>
 
@@ -670,7 +670,7 @@ body{
 
                     <div class="activity-card shadow-sm p-4 h-100">
 
-                        <div class="text-success fs-1 mb-3">
+                        <div class="text-primary fs-1 mb-3">
                             <i class="fa-solid fa-mountain"></i>
                         </div>
 
@@ -696,7 +696,7 @@ body{
 </section>
 
 <!-- ================= FOOTER ================= -->
-<footer class="bg-success text-light text-center py-4">
+<footer class="bg-primary text-light text-center py-4">
 
     © 2026 เที่ยวภาคเหนือ | จังหวัดเชียงใหม่
 
